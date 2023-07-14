@@ -10,9 +10,14 @@ body {
 }
 
 #app {
-  max-width: 400px;
+  max-width: 360px;
   margin: auto;
   padding: 20px;
+}
+
+.icon {
+  vertical-align: middle;
+  margin-right: 3px;
 }
 
 a {
@@ -23,4 +28,45 @@ a {
 
 a:hover {
   color: #f1f0cf;
+}
+
+.page-container {
+  min-height: calc(100vh - 155px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+  /* margin: 50px 0; */
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+.sm-text {
+  font-size: 11px;
+}
+
+.title {
+  color: #b6e6bd;
+  margin-bottom: 5px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.align-right {
+  text-align: right;
 }
