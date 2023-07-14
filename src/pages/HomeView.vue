@@ -9,7 +9,7 @@ export default {
 </script>
 <template>
   <div class="page-container">
-    <h4 class="title">Västra Götaland, Sweden</h4>
+    <h4 class="green">Västra Götaland, Sweden</h4>
     <h1>Gothenburg</h1>
     <img src="../assets/weather-icons/176.png" alt="weather icon!!" class="w-icon" />
     <h4>Partly cloudy</h4>
@@ -18,27 +18,27 @@ export default {
 
     <div class="details row">
       <div class="d-tab">
-        <h4 class="title sm-text">UV Index</h4>
+        <h4 class="green label sm-text">UV Index</h4>
         <p>4 Moderate</p>
       </div>
       <div class="d-tab">
-        <h4 class="title sm-text">Wind</h4>
+        <h4 class="green label sm-text">Wind</h4>
         <p>WSW 19.1 km/h</p>
       </div>
       <div class="d-tab">
-        <h4 class="title sm-text">Wind Gust</h4>
+        <h4 class="green label sm-text">Wind Gust</h4>
         <p>20.2 km/h</p>
       </div>
       <div class="d-tab">
-        <h4 class="title sm-text">Cloud Cover</h4>
+        <h4 class="green label sm-text">Cloud Cover</h4>
         <p>50%</p>
       </div>
       <div class="d-tab">
-        <h4 class="title sm-text">Visibility</h4>
+        <h4 class="green label sm-text">Visibility</h4>
         <p>10 km</p>
       </div>
       <div class="d-tab">
-        <h4 class="title sm-text">Humidity</h4>
+        <h4 class="green label sm-text">Humidity</h4>
         <p>73%</p>
       </div>
     </div>
@@ -82,6 +82,10 @@ h2 {
   min-width: 90px;
   max-width: 90px;
   white-space: nowrap;
+}
+
+.label {
+  margin-bottom: 5px;
 }
 
 .forcast-div {

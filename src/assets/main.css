@@ -17,7 +17,15 @@ body {
 
 .icon {
   vertical-align: middle;
-  margin-right: 3px;
+  margin: auto 3px;
+}
+
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
 }
 
 a {
@@ -26,7 +34,8 @@ a {
   transition: 0.4s;
 }
 
-a:hover {
+a:hover,
+button:hover {
   color: #f1f0cf;
 }
 
@@ -37,7 +46,6 @@ a:hover {
   justify-content: center;
   align-items: center;
   padding: 30px 0;
-  /* margin: 50px 0; */
 }
 
 h1,
@@ -52,11 +60,6 @@ p {
   font-size: 11px;
 }
 
-.title {
-  color: #b6e6bd;
-  margin-bottom: 5px;
-}
-
 .col {
   display: flex;
   flex-direction: column;
@@ -69,4 +72,22 @@ p {
 
 .align-right {
   text-align: right;
+}
+
+.green {
+  color: #b6e6bd;
+}
+
+.half-transparent {
+  opacity: 60%;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }

@@ -16,7 +16,9 @@ export default {
 <template>
   <header :class="isHome() && 'align-right'">
     <nav>
-      <RouterLink to="/change-location" v-if="isHome()">Change location</RouterLink>
+      <RouterLink to="/change-location" v-if="isHome()" class="half-transparent"
+        >Change location</RouterLink
+      >
       <RouterLink to="/" v-else><IconChevronLeft size="12px" class="icon" />Back</RouterLink>
     </nav>
     <div class="setting row" v-show="isHome()">
@@ -34,10 +36,6 @@ header {
 
 .setting {
   justify-content: end;
-  column-gap: 3px;
-}
-
-.setting p {
-  margin: 0;
+  gap: 3px;
 }
 </style>
