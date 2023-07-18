@@ -2,8 +2,21 @@
 import FooterView from '../FooterView.vue'
 
 export default {
+  props: {
+    data: {
+      weatherData: Object,
+      tempScale: String,
+      location: String
+    }
+  },
+
   components: {
     FooterView
+  },
+  computed: {
+    tempScaleSymbol() {
+      return this.data.tempScale === 'celsis' ? '°C' : '°F'
+    }
   }
 }
 </script>
@@ -13,8 +26,8 @@ export default {
     <h1>Gothenburg</h1>
     <img src="../assets/weather-icons/176.png" alt="weather icon!!" class="w-icon" />
     <h4>Partly cloudy</h4>
-    <p class="sm-text">Feels like 18°C</p>
-    <h2>18°C</h2>
+    <p class="sm-text">Feels like 18{{ tempScaleSymbol }}</p>
+    <h2>18{{ tempScaleSymbol }}</h2>
 
     <div class="details row">
       <div class="d-tab">
@@ -53,8 +66,8 @@ export default {
         <img src="../assets/weather-icons/176.png" alt="weather icon!!" width="20px" />
       </div>
       <div class="f-col">
-        <p>12 - 24°C</p>
-        <p>12.9 - 19.8°C</p>
+        <p>12 - 24{{ tempScaleSymbol }}</p>
+        <p>12.9 - 19.8{{ tempScaleSymbol }}</p>
       </div>
     </div>
   </div>

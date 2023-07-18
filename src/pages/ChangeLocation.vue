@@ -36,32 +36,34 @@ export default {
 <template>
   <div class="page-container">
     <form @submit.prevent="onSubmit">
-      <div class="input-div">
-        <span>
-          <input type="text" v-model="location" />
-          <IconHelpOctagon
-            size="15px"
-            class="icon green"
-            @mouseover="hover = true"
-            @mouseleave="hover = false"
-          />
-        </span>
-        <p class="error sm-text" v-show="error">{{ error }}</p>
-        <Transition class="helper" v-show="hover">
-          <p>
-            Enter US Zipcode, UK Postcode, Canada Postalcode, IP address, Latitude/Longitude
-            (decimal degree) or city name.
-          </p>
-        </Transition>
-      </div>
+      <span>
+        <input type="text" v-model="location" />
+        <IconHelpOctagon
+          size="15px"
+          class="icon green"
+          @mouseover="hover = true"
+          @mouseleave="hover = false"
+        />
+      </span>
+      <p class="error sm-text" v-show="error">{{ error }}</p>
+      <Transition class="helper" v-show="hover">
+        <p>
+          Enter US Zipcode, UK Postcode, Canada Postalcode, IP address, Latitude/Longitude (decimal
+          degree) or city name.
+        </p>
+      </Transition>
+
       <button>Change location <IconChevronRight size="12px" class="icon" /></button>
     </form>
   </div>
 </template>
 
 <style scoped>
-.input-div {
+form {
+  display: flex;
+  flex-direction: column;
   position: relative;
+  text-align: center;
 }
 
 input {
