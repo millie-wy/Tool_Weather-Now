@@ -1,8 +1,8 @@
 <script>
 export default {
   props: {
-    height: Number,
-    width: Number
+    height: String,
+    width: String
   },
   computed: {
     cssProps() {

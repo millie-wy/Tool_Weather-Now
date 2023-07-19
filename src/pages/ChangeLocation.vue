@@ -1,5 +1,7 @@
 <script>
 import { IconChevronRight, IconHelpOctagon } from '@tabler/icons-vue'
+import { fetchWeather, updateWeatherDataState } from '../helper'
+import { useDataStore } from '../store/DataStore'
 
 export default {
   components: { IconChevronRight, IconHelpOctagon },
@@ -20,14 +22,22 @@ export default {
   methods: {
     async onSubmit() {
       if (this.location === '') return (this.error = 'Please input a location')
-      await fetch(
-        `http://api.weatherapi.com/v1/forecast.json?days=3&q=${this.location}&key=${
-          import.meta.env.VITE_API_KEY
-        }`
-      )
-        .then((res) => res.json())
-        .then((json) => (json.error ? (this.error = json.error.message) : console.log(json)))
-        .catch((err) => console.error(err))
+      await fetchWeather(this.location).then((json) => {
+        if (json.error) {
+          return (this.error = json.error.message)
+        } else {
+          this.updateLocationState(this.location)
+          this.updateLs(this.location)
+          return updateWeatherDataState(json)
+        }
+      })
+    },
+    updateLocationState(location) {
+      const store = useDataStore()
+      return (store.$state.location = location)
+    },
+    updateLs(location) {
+      return localStorage.setItem('weather.now.location', JSON.stringify(location))
     }
   }
 }
