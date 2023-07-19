@@ -15,8 +15,8 @@
     "vue-router": "^4.2.2"
   },
   "devDependencies": {
-    "@tabler/icons-vue": "^2.25.0",
     "@rushstack/eslint-patch": "^1.2.0",
+    "@tabler/icons-vue": "^2.25.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^7.1.0",
     "eslint": "^8.39.0",
