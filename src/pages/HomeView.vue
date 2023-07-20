@@ -8,7 +8,7 @@ export default {
   props: {
     data: {
       weatherData: Object,
-      tempScale: String, // Bug found: not updating when switching setting
+      tempScale: String,
       location: String // TODO
     }
   },

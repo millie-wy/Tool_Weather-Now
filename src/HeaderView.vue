@@ -19,8 +19,8 @@ export default {
     }
   },
   computed: {
-    isCelsis() {
-      return this.tempScale === 'celsis'
+    iscelsius() {
+      return this.tempScale === 'celsius'
     }
   }
 }
@@ -35,13 +35,16 @@ export default {
       <RouterLink to="/" v-else><IconChevronLeft size="12px" class="icon" />Back</RouterLink>
     </nav>
     <div class="setting row" v-show="isHome()">
-      <button @click="updateTempScale('celsis')" :class="isCelsis ? 'chosen' : 'half-transparent'">
+      <button
+        @click="updateTempScale('celsius')"
+        :class="iscelsius ? 'chosen' : 'half-transparent'"
+      >
         °C
       </button>
       <p class="half-transparent">/</p>
       <button
         @click="updateTempScale('fahrenheit')"
-        :class="!isCelsis ? 'chosen' : 'half-transparent'"
+        :class="!iscelsius ? 'chosen' : 'half-transparent'"
       >
         °F
       </button>
