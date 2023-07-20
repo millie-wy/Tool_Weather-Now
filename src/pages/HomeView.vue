@@ -62,7 +62,7 @@ export default {
     getWeatherIcon(iconLink) {
       let iconNumber = iconLink
       iconNumber = iconNumber.slice(-7, -4)
-      return '../src/assets/weather-icons/' + iconNumber + '.png'
+      return 'src/assets/weather-icons/' + iconNumber + '.png'
     },
     formattedTemp(degreeC, degreeF) {
       return this.data.tempScale === 'celsius'
