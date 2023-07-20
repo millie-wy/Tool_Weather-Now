@@ -1,5 +1,6 @@
 <script>
 import FooterView from '../FooterView.vue'
+import DetailTab from '../components/DetailTab.vue'
 import SkeletonLoader from '../components/SkeletonLoader.vue'
 import { fetchWeather } from '../helper'
 
@@ -17,7 +18,8 @@ export default {
   },
   components: {
     FooterView,
-    SkeletonLoader
+    SkeletonLoader,
+    DetailTab
   },
   computed: {
     d() {
@@ -61,6 +63,11 @@ export default {
       let iconNumber = iconLink
       iconNumber = iconNumber.slice(-7, -4)
       return '../src/assets/weather-icons/' + iconNumber + '.png'
+    },
+    formattedTemp(degreeC, degreeF) {
+      return this.data.tempScale === 'celsius'
+        ? degreeC + this.tempScaleSymbol
+        : degreeF + this.tempScaleSymbol
     }
   }
 }
@@ -68,9 +75,7 @@ export default {
 
 <template>
   <div class="page-container">
-    <h4 v-if="hasWeatherData" class="green">
-      {{ regionAndCountry }}
-    </h4>
+    <h4 v-if="hasWeatherData" class="green">{{ regionAndCountry }}</h4>
     <SkeletonLoader v-else />
 
     <h1 v-if="hasWeatherData">{{ d.location.name }}</h1>
@@ -79,66 +84,48 @@ export default {
     <img
       v-if="hasWeatherData"
       :src="getWeatherIcon(d.current.condition.icon)"
-      alt="weather-condition-icon"
+      :alt="d.current.condition.text + '-icon'"
       class="w-icon"
     />
     <SkeletonLoader v-else width="64" height="64" class="w-icon" />
+
     <h4 v-if="hasWeatherData">{{ d.current.condition.text }}</h4>
     <SkeletonLoader v-else width="100" />
+
     <p v-if="hasWeatherData" class="sm-text">
       Feels like
-      {{
-        data.tempScale === 'celsius'
-          ? d.current.feelslike_c + tempScaleSymbol
-          : d.current.feelslike_f + tempScaleSymbol
-      }}
+      {{ formattedTemp(d.current.feelslike_c, d.current.feelslike_f) }}
     </p>
     <SkeletonLoader v-else width="100" />
+
     <h2 v-if="hasWeatherData">
-      {{
-        data.tempScale === 'celsius'
-          ? d.current.temp_c + tempScaleSymbol
-          : d.current.temp_f + tempScaleSymbol
-      }}
+      {{ formattedTemp(d.current.temp_c, d.current.temp_f) }}
     </h2>
     <SkeletonLoader v-else width="100" height="45" />
 
     <div class="details row">
-      <div class="d-tab">
-        <h4 class="green label sm-text">UV Index</h4>
-        <p v-if="hasWeatherData">{{ uvIndex }}</p>
-        <SkeletonLoader v-else width="90" />
-      </div>
-      <div class="d-tab">
-        <h4 class="green label sm-text">Wind</h4>
-        <p v-if="hasWeatherData">{{ d.current.wind_dir + ' ' + d.current.wind_kph }} km/h</p>
-        <SkeletonLoader v-else width="90" />
-      </div>
-      <div class="d-tab">
-        <h4 class="green label sm-text">Wind Gust</h4>
-        <p v-if="hasWeatherData">{{ d.current.gust_kph }} km/h</p>
-        <SkeletonLoader v-else width="90" />
-      </div>
-      <div class="d-tab">
-        <h4 class="green label sm-text">Cloud Cover</h4>
-        <p v-if="hasWeatherData">{{ d.current.cloud }}%</p>
-        <SkeletonLoader v-else width="90" />
-      </div>
-      <div class="d-tab">
-        <h4 class="green label sm-text">Visibility</h4>
-        <p v-if="hasWeatherData">{{ d.current.vis_km }} km</p>
-        <SkeletonLoader v-else width="90" />
-      </div>
-      <div class="d-tab">
-        <h4 class="green label sm-text">Humidity</h4>
-        <p v-if="hasWeatherData">{{ d.current.humidity }}%</p>
-        <SkeletonLoader v-else width="90" />
-      </div>
+      <DetailTab v-if="hasWeatherData" label="UV Index" :content="uvIndex" />
+      <SkeletonLoader v-else width="90" />
+      <DetailTab
+        v-if="hasWeatherData"
+        label="Wind"
+        :content="d.current.wind_dir + ' ' + d.current.wind_kph + ' km/h'"
+      />
+      <SkeletonLoader v-else width="90" />
+      <DetailTab v-if="hasWeatherData" label="Wind Gust" :content="d.current.gust_kph + ' km/h'" />
+      <SkeletonLoader v-else width="90" />
+      <DetailTab v-if="hasWeatherData" label="Cloud Cover" :content="d.current.cloud + '%'" />
+      <SkeletonLoader v-else width="90" />
+      <DetailTab v-if="hasWeatherData" label="Visibility" :content="d.current.vis_km + ' km'" />
+      <SkeletonLoader v-else width="90" />
+      <DetailTab v-if="hasWeatherData" label="Humidity" :content="d.current.humidity + '%'" />
+      <SkeletonLoader v-else width="90" />
     </div>
 
     <div class="forcast-div row">
       <div class="f-col align-right">
         <h4>Tomorrow</h4>
+
         <h4 v-if="hasWeatherData">{{ formattedDate }}</h4>
         <SkeletonLoader v-else width="75" />
       </div>
@@ -150,6 +137,7 @@ export default {
           width="20"
         />
         <SkeletonLoader v-else width="20" />
+
         <img
           v-if="hasWeatherData"
           :src="getWeatherIcon(d.forecast.forecastday[2].day.condition.icon)"
@@ -161,6 +149,7 @@ export default {
       <div class="f-col">
         <p v-if="hasWeatherData">{{ forecastTempTomorrow }}</p>
         <SkeletonLoader v-else width="75" />
+
         <p v-if="hasWeatherData">{{ forecastTempDayAfterTmw }}</p>
         <SkeletonLoader v-else width="75" />
       </div>

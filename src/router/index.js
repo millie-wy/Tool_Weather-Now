@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../pages/HomeView.vue'
-import ErrorView from '../pages/ErrorView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,7 +20,7 @@ const router = createRouter({
     {
       path: '/error',
       name: 'error page',
-      component: ErrorView
+      component: () => import('../pages/ErrorView.vue')
     }
   ]
 })

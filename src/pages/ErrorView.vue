@@ -16,7 +16,7 @@ export default {
   </div>
 </template>
 
-<style scope>
+<style scoped>
 .page-container {
   gap: 8px;
 }

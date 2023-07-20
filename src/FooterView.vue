@@ -2,9 +2,7 @@
 import { IconCopyright } from '@tabler/icons-vue'
 
 export default {
-  components: {
-    IconCopyright
-  }
+  components: { IconCopyright }
 }
 </script>
 

@@ -16,7 +16,7 @@ export default {
 </script>
 
 <template>
-  <div class="half-transparent" :style="cssProps"></div>
+  <div class="half-transparent" :style="cssProps" />
 </template>
 
 <style scoped>
