@@ -3,13 +3,12 @@ import FooterView from '../FooterView.vue'
 import SkeletonLoader from '../components/SkeletonLoader.vue'
 import { fetchWeather } from '../helper'
 
-//TODO: local storage
 export default {
   props: {
     data: {
       weatherData: Object,
       tempScale: String,
-      location: String // TODO
+      location: String
     }
   },
   data() {
@@ -18,11 +17,9 @@ export default {
     }
   },
   async mounted() {
-    await fetchWeather(this.data.location)
-
-    if (await fetchWeather(this.data.location).error) {
-      return (this.error = true)
-    }
+    console.log(this.data.weatherData)
+    const res = await fetchWeather(this.data.location)
+    if (!res.ok) return (this.error = true) //TODO: handle error
   },
   components: {
     FooterView,
@@ -58,6 +55,11 @@ export default {
     formattedDate() {
       const date = new Date(this.d.forecast.forecastday[2].date)
       return date.getDate() + '/' + (date.getMonth() + 1)
+    },
+    regionAndCountry() {
+      const region = this.d.location.region
+      const country = this.d.location.country
+      return region ? region + ', ' + country : country
     }
   },
   methods: {
@@ -73,7 +75,7 @@ export default {
 <template>
   <div class="page-container">
     <h4 v-if="hasWeatherData" class="green">
-      {{ d.location.region + ', ' + d.location.country }}
+      {{ regionAndCountry }}
     </h4>
     <SkeletonLoader v-else />
 

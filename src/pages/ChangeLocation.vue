@@ -1,6 +1,6 @@
 <script>
 import { IconChevronRight, IconHelpOctagon } from '@tabler/icons-vue'
-import { fetchWeather, updateWeatherDataState } from '../helper'
+import { fetchWeather } from '../helper'
 import { useDataStore } from '../store/DataStore'
 
 export default {
@@ -22,15 +22,13 @@ export default {
   methods: {
     async onSubmit() {
       if (this.location === '') return (this.error = 'Please input a location')
-      await fetchWeather(this.location).then((json) => {
-        if (json.error) {
-          return (this.error = json.error.message)
-        } else {
-          this.updateLocationState(this.location)
-          this.updateLs(this.location)
-          return updateWeatherDataState(json)
-        }
-      })
+      const res = await fetchWeather(this.location)
+      if (!res.ok)
+        return (this.error =
+          res.result === 'Bad Request' ? 'No matching location found' : res.result)
+      this.updateLocationState(this.location)
+      this.updateLs(this.location)
+      return this.$router.push('/')
     },
     updateLocationState(location) {
       const store = useDataStore()
@@ -81,6 +79,7 @@ input {
   border: none;
   border-bottom: 1px solid #fff;
   width: 180px;
+  height: 26px;
   color: inherit;
   font-family: inherit;
   font-size: 15px;
@@ -105,7 +104,7 @@ input:focus {
   position: absolute;
   right: left;
   max-width: 180px;
-  bottom: -18px;
+  top: 31px;
 }
 
 .helper {
