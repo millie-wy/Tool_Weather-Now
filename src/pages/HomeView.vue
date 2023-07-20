@@ -11,15 +11,9 @@ export default {
       location: String
     }
   },
-  data() {
-    return {
-      error: false
-    }
-  },
   async mounted() {
-    console.log(this.data.weatherData)
     const res = await fetchWeather(this.data.location)
-    if (!res.ok) return (this.error = true) //TODO: handle error
+    if (!res.ok) return this.$router.push('/error')
   },
   components: {
     FooterView,
