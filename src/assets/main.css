@@ -2,7 +2,12 @@
 
 body {
   min-height: 100vh;
-  background: #4baea0;
+  background: rgb(116, 211, 198);
+  background: linear-gradient(
+    rgba(63, 147, 165, 1) 0%,
+    rgba(75, 174, 160, 1) 50%,
+    rgba(116, 211, 198, 1) 100%
+  );
   color: #fff;
   font-family: 'Poppins', sans-serif;
   font-size: 13px;
