@@ -8,7 +8,9 @@ export default {
 
 <template>
   <footer class="sm-text half-transparent">
-    Created by Millie Cheung<IconCopyright size="12px" class="icon" />All rights reserved
+    Created by
+    <a target="_blank" href="https://github.com/millie-wy/Tool_Weather-Now">Millie Cheung</a
+    ><IconCopyright size="12px" class="icon" />All rights reserved
   </footer>
 </template>
 
